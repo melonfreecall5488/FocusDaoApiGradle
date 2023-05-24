@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!-- console로 log 남기기  
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>
+                %d{HH:mm:ss} [%-5level : ]%msg%n
+            </pattern>
+        </encoder>
+    </appender>
+    <appender name="consoleForLoginInterceptor" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>
+                 %d{HH:mm:ss} [%-5level : ]%msg%n
+            </pattern>
+        </encoder>
+    </appender>
+-->
+
+    <!-- file로 log 남기기 -->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>
+                 %d{yyyy/MM/dd HH:mm:ss}[%-5level] : %msg%n
+            </pattern>
+        </encoder>
+    </appender>
+
+    <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>/Users/home/pcrm/Log/focus_log.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>/Users/home/pcrm/Log/focus_log_%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>31</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>
+                %d{yyyy/MM/dd HH:mm:ss}[%-5level] : %msg%n
+                <!-- %-5level %d{HH:mm:ss} %logger[%method:%line] - %msg%n : 어떤 메소드에 어떤 라인에서 찍혔는지-->
+            </pattern>
+        </encoder>
+    </appender>
+
+    <!-- 이 아래에 있는 애들 다 log로 찍겠다. -->
+    <!-- Application Loggers   info, debug, warn,  -->
+    <logger name="com.smart.focus.ceoapi">
+        <level value="trace" />
+    </logger>
+
+    <logger name="org.springframework" level="warn" />
+
+    <!-- trace debug info warn error -->
+    <!-- 
+    <logger name="jdbc.sqlonly" level="info" />
+    <logger name="jdbc.resultset" level="info" /> 
+    <logger name="jdbc.resultsettable" level="info" />
+    -->
+
+    <root level="warn">
+        <appender-ref ref="console" />
+        <appender-ref ref="file" />
+    </root>
+
+</configuration>
