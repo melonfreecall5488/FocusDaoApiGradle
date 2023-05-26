@@ -796,7 +796,7 @@ public class SpProcServiceImpl {
 
 			Log.Debug(inGroup.toJSONString());
 
-		} else if (inParam.containsKey("filter")) {
+		} else if (inParam.containsKey("filter") && ((JSONArray) inParam.get("filter")).size() > 0) {
 			JSONArray inFilter = (JSONArray) inParam.get("filter");
 			if (inParam.containsKey("group")) {
 				inGroup = (JSONArray) inParam.get("group");
